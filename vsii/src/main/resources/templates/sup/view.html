@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>bill</title>
+</head>
+<body>
+<nav th:replace="layout::header"></nav>
+<H3>Loại giao dịch: </H3><p th:text="${bill.trans_type_code}">
+<H3>Số tham chiếu khách hàng: </H3><p th:text="${bill.cust_ref}">
+<H3>Số tham chiếu ngân hàng: </H3><p th:text="${bill.bidv_ref}">
+<H3>Chi nhánh: </H3><p th:text="${bill.branch_code}">
+<H3>Tên khách hàng: </H3><p th:text="${bill.cust_name}">
+<H3>Địa chỉ khách hàng: </H3><p th:text="${bill.cust_address}">
+<H3>Số CIF: </H3><p th:text="${bill.cif_no}">
+<H3>Số tiền: </H3><p th:text="${bill.amount}">
+<H3>Loại tiền: </H3><p th:text="${bill.curr_code}">
+<H3>Trạng thái: </H3><p th:text="${bill.trans_status_code.name}">
+<H3>User tạo: </H3><p th:text="${bill.create_user}">
+<H3>Thời điểm tạo: </H3><p th:text="${bill.create_date}">
+<H3>User sửa: </H3><p th:text="${bill.update_user}">
+<H3>Thời điểm sửa cuối: </H3><p th:text="${bill.update_date}">
+<H3>User duyệt/hủy duyệt: </H3><p th:text="${bill.approve_reject_user}">
+<h3>Lý do hủy duyệt: </h3><p th:text="${bill.remark}">
+</body>
+<footer th:replace="layout :: footer"></footer>
+</html>
