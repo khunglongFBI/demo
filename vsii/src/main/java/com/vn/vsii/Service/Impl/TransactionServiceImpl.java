@@ -12,31 +12,31 @@ import org.springframework.stereotype.Service;
 @Service
 public class TransactionServiceImpl implements TransactionService {
     @Autowired
-    private TransactionRepository billRepository;
+    private TransactionRepository transactionRepository;
 
 
     @Override
     public Page<Transaction> findAll(Pageable pageable) {
-        return billRepository.findAll(pageable);
+        return transactionRepository.findAll(pageable);
     }
 
     @Override
     public Transaction findById(Long id) {
-        return billRepository.findById(id).orElse(null);
+        return transactionRepository.findById(id).orElse(null);
     }
 
     @Override
     public void save(Transaction bill) {
-    billRepository.save(bill);
+    transactionRepository.save(bill);
     }
 
     @Override
     public void remove(Long id) {
-    billRepository.deleteById(id);
+    transactionRepository.deleteById(id);
     }
 
     @Override
     public Transaction findByTransId(long id) {
-        return billRepository.findByTransId(id);
+        return transactionRepository.findByTransId(id);
     }
 }

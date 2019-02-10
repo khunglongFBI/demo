@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <title>Create Account</title>
 </head>
-<body class="main-content" th:align="center">
+<body class="main-content">
 <nav th:replace="layout::header"></nav>
-
 <h1>Create Account</h1>
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
 </th:block>
-<form th:action="@{/create-account}" th:object="${account}" method="POST" >
+<form th:action="@{/create-account}" th:object="${account}" method="post">
     <table>
         <tr>
             <td>User Name:</td>
@@ -47,6 +46,6 @@
         </tr>
     </table>
 </form>
-</body>
 <footer th:replace="layout :: footer"></footer>
+</body>
 </html>

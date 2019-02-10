@@ -21,13 +21,13 @@ import java.util.Random;
     public class TransactionController {
 
         @Autowired
-        private TransactionService billService;
+        private TransactionService transactionService;
         @Autowired
-        private TransactionStatusService billStatusService;
+        private TransactionStatusService transactionStatusService;
 
         @ModelAttribute("billstatus")
         public Iterable<TransactionStatus> roles() {
-            return billStatusService.findAll();
+            return transactionStatusService.findAll();
         }
 
         @GetMapping("/teller/create")
@@ -45,12 +45,12 @@ import java.util.Random;
             Random rd = new Random();
             while (true) {
                 int number = rd.nextInt() + 1000000;
-                if (billService.findByTransId(number) == null && number > 0) {
+                if (transactionService.findByTransId(number) == null && number > 0) {
                     bill.setTransId(number);
                     break;
                 }
             }
-            billService.save(bill);
+            transactionService.save(bill);
             ModelAndView modelAndView = new ModelAndView("/teller/create");
             modelAndView.addObject("bill", new Transaction());
             modelAndView.addObject("message", "New bill created successfully");
@@ -60,7 +60,7 @@ import java.util.Random;
 
         @GetMapping("/teller")
         public ModelAndView listBills(Pageable pageable) {
-            Page<Transaction> bills = billService.findAll(pageable);
+            Page<Transaction> bills = transactionService.findAll(pageable);
             ModelAndView modelAndView = new ModelAndView("teller/list");
             modelAndView.addObject("bills", bills);
             return modelAndView;
@@ -68,7 +68,7 @@ import java.util.Random;
 
         @GetMapping("/delete-bill/{id}")
         public ModelAndView showDeleteBillForm(@PathVariable Long id) {
-            Transaction bill = billService.findById(id);
+            Transaction bill = transactionService.findById(id);
             if (bill != null) {
                 ModelAndView modelAndView = new ModelAndView("/teller/delete");
                 modelAndView.addObject("bill", bill);
@@ -81,15 +81,15 @@ import java.util.Random;
 
         @PostMapping("/delete-bill")
         public String deleteBill(@ModelAttribute("bill") Transaction bill) {
-            billService.remove(bill.getBill_id());
+            transactionService.remove(bill.getBill_id());
             return "redirect:/teller/";
         }
 
         @GetMapping("/agree-bill-status/{id}")
         public String agree(@PathVariable Long id) {
-            Transaction bill = billService.findById(id);
+            Transaction bill = transactionService.findById(id);
             if (bill != null) {
-                TransactionStatus billStatus = billStatusService.findByName("approved");
+                TransactionStatus billStatus = transactionStatusService.findByName("approved");
                 bill.setTrans_status_code(billStatus);
                 return "redirect:/teller";
             } else {
@@ -99,9 +99,9 @@ import java.util.Random;
 
         @GetMapping("/refuse-bill-status/{id}")
         public String refuse(@PathVariable Long id) {
-            Transaction bill = billService.findById(id);
+            Transaction bill = transactionService.findById(id);
             if (bill != null) {
-                TransactionStatus billStatus = billStatusService.findByName("refuse");
+                TransactionStatus billStatus = transactionStatusService.findByName("refuse");
                 bill.setTrans_status_code(billStatus);
                 return "redirect:/teller";
             } else {

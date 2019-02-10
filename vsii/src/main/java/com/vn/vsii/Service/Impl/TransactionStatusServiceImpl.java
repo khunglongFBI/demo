@@ -8,29 +8,29 @@ import org.springframework.stereotype.Service;
 @Service
 public class TransactionStatusServiceImpl implements TransactionStatusService {
     @Autowired
-    private TransactionStatusRepository billStatusRepository;
+    private TransactionStatusRepository transactionStatusRepository;
     @Override
     public Iterable<TransactionStatus> findAll() {
-        return billStatusRepository.findAll();
+        return transactionStatusRepository.findAll();
     }
 
     @Override
     public TransactionStatus findById(Long id) {
-        return billStatusRepository.findById(id).orElse(null);
+        return transactionStatusRepository.findById(id).orElse(null);
     }
 
     @Override
     public void save(TransactionStatus billStatus) {
-        billStatusRepository.save(billStatus);
+        transactionStatusRepository.save(billStatus);
     }
 
     @Override
     public void remove(Long id) {
-        billStatusRepository.deleteById(id);
+        transactionStatusRepository.deleteById(id);
     }
 
     @Override
     public TransactionStatus findByName(String name) {
-        return billStatusRepository.findByName(name);
+        return transactionStatusRepository.findByName(name);
     }
 }
